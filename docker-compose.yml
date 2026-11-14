@@ -39,7 +39,7 @@ services:
   api:
     build: .
     environment:
-      DATABASE_URL: postgresql://gateway_app:${APP_DB_PASSWORD}@db:5432/acme
+      DATABASE_URL: postgresql://writeapi_app:${APP_DB_PASSWORD}@db:5432/acme
       REDIS_URL: redis://redis:6379/0
       CLIENT_KEYS: ${CLIENT_KEYS:?set CLIENT_KEYS in .env}
       ALLOWED_NETWORKS: ${ALLOWED_NETWORKS:-["127.0.0.1/32"]}
