@@ -18,8 +18,8 @@ sequenceDiagram
     Note over A: show a person, or decide
     A->>W: POST /v1/commit {token} + Idempotency-Key (signed)
     W->>W: breaker closed? inside allowed hours?
-    W->>DB: BEGIN; lock caller; daily cap; take token; re-check rules with row locks
-    W->>DB: preview unchanged? → INSERT …; mark token used; audit; COMMIT
+    W->>DB: BEGIN, lock caller, daily cap, take token, re-check rules with row locks
+    W->>DB: preview unchanged? → INSERT …, mark token used, audit, COMMIT
     W-->>A: 201 result (stored under the Idempotency-Key)
     A->>W: same Idempotency-Key again (lost response, retry)
     W-->>A: same 201, Idempotent-Replayed: true. Nothing written twice
